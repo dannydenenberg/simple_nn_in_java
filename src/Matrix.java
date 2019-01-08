@@ -4,6 +4,14 @@ public class Matrix {
     private double[][] mat;
 
     /**
+     * Convert the class to an array by returning the private matrix.
+     * @return
+     */
+    public double[][] toArray() {
+        return mat;
+    }
+
+    /**
      * Initialization functions
      */
 
@@ -54,9 +62,65 @@ public class Matrix {
     /***************************************************************************/
 
 
+    public void mul(double scalar) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                mat[i][j] *= scalar;
+            }
+        }
+    }
+
+    public void add(double scalar) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                mat[i][j] += scalar;
+            }
+        }
+    }
+
+    public void sub(double scalar) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                mat[i][j] -= scalar;
+            }
+        }
+    }
+
+    public void div(double scalar) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                mat[i][j] /= scalar;
+            }
+        }
+    }
 
 
-    
+    /**
+     * Now, element wise operations.
+     */
+
+
+    /**
+     * Return a new array that is the element wise multiplication of the two input Matrices.
+     * @param matrix
+     * @param matrixOther
+     * @return
+     */
+    public static Matrix mul(Matrix matrix, Matrix matrixOther) {
+        double[][] mat = matrixOther.toArray();
+        double[][] otherArray = matrix.toArray();
+
+        double[][] newMatrix = new double[mat.length][mat[0].length];
+
+
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                newMatrix[i][j] = mat[i][j] * otherArray[i][j];
+            }
+        }
+
+        return new Matrix(newMatrix);
+    }
 
 
 }
