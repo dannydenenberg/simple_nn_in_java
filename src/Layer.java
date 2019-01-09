@@ -12,6 +12,7 @@ public class Layer {
     private int inputNeuronsNumber;
     private int numberOfNeurons;
     private Matrix weights;
+    private double bias;
 
     private String activationFunctionName;
 
@@ -32,8 +33,17 @@ public class Layer {
 
         // create a randomly initialized matrix of the correct shape
         weights = Matrix.random(weightsShape);
+
+        // randomly initialize the bias
+        bias = Math.random();
     }
 
+    /**
+     * Same as the first constructor, but allows you to specify the activationFunctionName
+     * @param numInputNeurons
+     * @param numNeurons
+     * @param activationFunctionName
+     */
     public Layer(int numInputNeurons, int numNeurons, String activationFunctionName) {
         this.inputNeuronsNumber = numInputNeurons;
         this.numberOfNeurons = numNeurons;
@@ -65,6 +75,8 @@ public class Layer {
         2. BIASES!!!!!!!!!!!!!!
         3. Activate the vector.
          */
+
+        // multiply the inputs and weights into a vector
     }
 
 
@@ -77,6 +89,8 @@ public class Layer {
     private double activation(double number) {
         if (activationFunctionName.equals("sigmoid")) {
             return sigmoid(number);
+        } else if (activationFunctionName.equals("relu")) {
+            return relu(number);
         }
 
         throw new java.lang.RuntimeException("Error: Unknown activation function. IN CLASS: LAYER.");
@@ -89,5 +103,14 @@ public class Layer {
      */
     private double sigmoid(double x) {
         return 1 / (1 + Math.exp(-x));
+    }
+
+    /**
+     * The Relu activation function. Used withing the function `activation(double number)`
+     * @param x
+     * @return
+     */
+    private double relu(double x) {
+        return Math.max(x, 0);
     }
 }
