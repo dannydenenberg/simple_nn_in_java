@@ -209,7 +209,68 @@ public class Matrix {
      * @return
      */
     public static Matrix dot(Matrix first, Matrix second) {
-        
+        // set the resulting shape to be the rows from the first matrix and the columns from the second matrix
+        Shape resultShape = new Shape(first.getShape().rows,second.getShape().cols);
+
+        // create the matrix that will store the resulting dot product
+        Matrix resultMatrix = zeros(resultShape);
+        double[][] resultingArray = new double[resultShape.rows][resultShape.cols];
+
+        // create the underlying arrays in the first and second parameters
+        double[][] firstArray = first.toArray();
+        double[][] secondArray = second.toArray();
+
+        // set up some variables for clarity
+        int rowsInFirst = firstArray.length;
+        int columnsInSecond = secondArray[0].length;
+
+        // for every row in the first, take the dot product of the whole row and each column
+        for (int i = 0; i < rowsInFirst; i++) {
+            for (int j = 0; j < columnsInSecond; j++) {
+                // for every column in the second array, add the dot product of that column and
+                //   the current row from first to the current row in the resultingArray
+                resultingArray[i][j] = vectorDotProduct(firstArray[i], getColumnAtIndex(j,secondArray));
+            }
+        }
+
+        return new Matrix(resultingArray);
+    }
+
+
+    /**
+     * Helper function.
+     * Returns the dot product of two vectors. (1-dimensional matrices)
+     * @param first
+     * @param second
+     * @return
+     *
+     * NOTE** Both of the arrays should be of the same size.
+     */
+    private static double vectorDotProduct(double[] first, double[] second) {
+        double resultingNumber = 0;
+
+        for (int i = 0; i < first.length; i++) {
+            resultingNumber += first[i] * second[i];
+        }
+
+        return resultingNumber;
+    }
+
+    /**
+     * Helper function.
+     * Returns the column at the column index specified.
+     * @param index
+     * @param arr
+     * @return
+     */
+    private static double[] getColumnAtIndex(int index, double[][] arr) {
+        double[] column = new double[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            column[i] = arr[i][index];
+        }
+
+        return column;
     }
 
 

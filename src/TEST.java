@@ -1,18 +1,20 @@
 public class TEST {
     public static void main(String[] args) {
-        Matrix mat = Matrix.random(new Shape(4,3));
-        mat.setName("mat");
+        Matrix mat = Matrix.random(new Shape(2,2));
+        mat.multiplyAndConvertToInts(5);
+        mat.setName("Matrix #1");
         mat.show();
-        mat.multiplyAndConvertToInts(10);
-        mat.show();
 
-        mat.mul(289);
 
-        Matrix other = Matrix.random(new Shape(4,3)).mul(20);
-        other.setName("other");
+        Matrix mat2 = Matrix.random(new Shape(2,2));
+        mat2.multiplyAndConvertToInts(5);
+        mat2.setName("Matrix #2");
+        mat2.show();
 
-        Matrix newne = Matrix.mul(other, mat);
-        newne.setName("newne");
-        newne.show();
+        System.out.println("\n\n\n");
+
+        Matrix matDOtProduct = Matrix.dot(mat, mat2);
+        matDOtProduct.setName("DOT PRODUCT");
+        matDOtProduct.show();
     }
 }
