@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Matrix {
+    // the inner matrice that will be operated on
     private double[][] mat;
     private String name;
 
@@ -12,10 +13,19 @@ public class Matrix {
         return mat;
     }
 
+    /**
+     * Returns the shape of the inner matrix: `mat`.
+     * @return
+     */
     public Shape getShape() {
         return new Shape(mat.length, mat[0].length);
     }
 
+    /**
+     * Sets the `name` variable. This will be used when printing out this object.
+     * The name will be used to specify this class.
+     * @param s
+     */
     public void setName(String s) {
         this.name = s;
     }
@@ -24,10 +34,19 @@ public class Matrix {
      * Initialization functions
      */
 
+    /**
+     * Simple initialization. Just sets the inner matrix to be the one inputed in the parameter.
+     * @param matrix
+     */
     public Matrix(double[][] matrix) {
         mat = matrix;
     }
 
+    /**
+     * Easy initialization of an array full of zeros.
+     * @param s
+     * @return
+     */
     public static Matrix zeros(Shape s) {
         return new Matrix(fillShapeWithValue(s, 0));
     }
@@ -40,10 +59,22 @@ public class Matrix {
         return new Matrix(fillShapeWithValue(s, 10));
     }
 
+    /**
+     * Fills the matrix of specified shape with a specific value.
+     * @param s
+     * @param value
+     * @return
+     */
     public static Matrix fillWithVal(Shape s, double value) {
         return new Matrix(fillShapeWithValue(s, value));
     }
 
+
+    /**
+     * Generates a matrix of the specified shape filled with random double values between 0 and 1.
+     * @param s
+     * @return
+     */
     public static Matrix random(Shape s) {
         double[][] matrix = new double[s.rows][s.cols];
 
@@ -56,6 +87,10 @@ public class Matrix {
         return new Matrix(matrix);
     }
 
+    /**
+     * Multiplies each value in this matrix with a scalar value and then rounds all of the values.
+     * @param scalar
+     */
     public void multiplyAndConvertToInts(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
@@ -64,7 +99,13 @@ public class Matrix {
         }
     }
 
-    public static double[][] fillShapeWithValue(Shape s, double val) {
+    /**
+     * Helper function for the `fillWithVal(Shape, double)` function specified before.
+     * @param s
+     * @param val
+     * @return
+     */
+    private static double[][] fillShapeWithValue(Shape s, double val) {
         double[][] matrix = new double[s.rows][s.cols];
 
         for (int i = 0; i < s.rows; i++) {
@@ -80,7 +121,7 @@ public class Matrix {
 
     /**
      * Here are the simple matrix with scalar operations.
-     * Each function returns the matrix for ease of initialization.
+     * Each function returns the matrix for ease of initialization. There is no need to create a new matrix object after one is created even though these functions return `this`;
      EX:
         Matrix mat = Matrix.random(new Shape(3,4)).mul(10); // random values from 0 to 10
      * @param scalar
@@ -96,6 +137,11 @@ public class Matrix {
         return this;
     }
 
+    /**
+     * Adds one number to every element in the matrix
+     * @param scalar
+     * @return
+     */
     public Matrix add(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
@@ -105,6 +151,11 @@ public class Matrix {
         return this;
     }
 
+    /**
+     * Subtracts one value from every element in the matrix.
+     * @param scalar
+     * @return
+     */
     public Matrix sub(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
@@ -114,6 +165,11 @@ public class Matrix {
         return this;
     }
 
+    /**
+     * Divides one number with every element in the matrix
+     * @param scalar
+     * @return
+     */
     public Matrix div(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
@@ -152,6 +208,12 @@ public class Matrix {
     }
 
 
+    /**
+     * Returns the element wise addition of two matrices.
+     * @param matrix
+     * @param matrixOther
+     * @return
+     */
     public static Matrix add(Matrix matrix, Matrix matrixOther) {
         double[][] mat = matrixOther.toArray();
         double[][] otherArray = matrix.toArray();
@@ -168,7 +230,12 @@ public class Matrix {
         return new Matrix(newMatrix);
     }
 
-
+    /**
+     * Returns the element wise subtraction of two matrices.
+     * @param matrix
+     * @param matrixOther
+     * @return
+     */
     public static Matrix sub(Matrix matrix, Matrix matrixOther) {
         double[][] mat = matrixOther.toArray();
         double[][] otherArray = matrix.toArray();
@@ -185,6 +252,12 @@ public class Matrix {
         return new Matrix(newMatrix);
     }
 
+    /**
+     * Returns the element wise division of two matrices.
+     * @param matrix
+     * @param matrixOther
+     * @return
+     */
     public static Matrix div(Matrix matrix, Matrix matrixOther) {
         double[][] mat = matrixOther.toArray();
         double[][] otherArray = matrix.toArray();
@@ -289,6 +362,18 @@ public class Matrix {
         System.out.print("]");
     }
 
+    /**
+     * Helper function.
+     * Turns an array into a string representing the array
+      
+
+     EX:
+        [1, 2, 3, 4]
+
+
+     * @param arr
+     * @return
+     */
     private String createArrayLineForPrinting(double[] arr) {
         String out = "[" + arr[0];
         for (int i = 1; i < arr.length; i++) {
