@@ -1,5 +1,9 @@
 public class TEST {
     public static void main(String[] args) {
+
+    }
+
+    public static void testMatrix() {
         Matrix mat = Matrix.random(new Shape(2,2));
         mat.multiplyAndConvertToInts(5);
         mat.setName("Matrix #1");

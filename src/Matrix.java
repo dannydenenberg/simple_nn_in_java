@@ -1,5 +1,13 @@
+/*
+ * @author Daniel Denenberg
+ * @date January 8, 2019
+ */
+
 import java.util.ArrayList;
 
+/**
+ * A simple matrix class implemented from scratch.
+ */
 public class Matrix {
     // the inner matrice that will be operated on
     private double[][] mat;
@@ -365,7 +373,7 @@ public class Matrix {
     /**
      * Helper function.
      * Turns an array into a string representing the array
-      
+
 
      EX:
         [1, 2, 3, 4]

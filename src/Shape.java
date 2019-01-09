@@ -1,5 +1,7 @@
 /**
  * This class will be used to represent the shape of a matrix.
+ * @author Daniel Denenberg
+ * @date January 8, 2019
  */
 public class Shape {
     public int rows;
