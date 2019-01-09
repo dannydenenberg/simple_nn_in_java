@@ -99,12 +99,13 @@ public class Matrix {
      * Multiplies each value in this matrix with a scalar value and then rounds all of the values.
      * @param scalar
      */
-    public void multiplyAndConvertToInts(double scalar) {
+    public Matrix multiplyAndConvertToInts(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
                 mat[i][j] = Math.round(mat[i][j] * scalar);
             }
         }
+        return this;
     }
 
     /**
@@ -317,6 +318,24 @@ public class Matrix {
         return new Matrix(resultingArray);
     }
 
+    /**
+     * Returns the transposition of the inputed matrix (rows become columns, columns become rows).
+     * @param mat
+     * @return
+     */
+    public static Matrix transpose(Matrix mat) {
+        // in the new shape, the rows are the columns and the columns are the rows
+        Shape resultingMatrixShape = new Shape(mat.getShape().cols, mat.getShape().rows);
+        double[][] resultingArray = new double[resultingMatrixShape.rows][resultingMatrixShape.cols];
+
+        // loop through the columns of the old matrix (rows of the new matrix), and add that column to the rows of the new matrix
+        for (int i = 0; i < resultingMatrixShape.rows; i++) {
+            resultingArray[i] = getColumnAtIndex(i, mat.toArray());
+        }
+
+        return new Matrix(resultingArray);
+    }
+
 
     /**
      * Helper function.
@@ -352,6 +371,23 @@ public class Matrix {
         }
 
         return column;
+    }
+
+    /**
+     * Applies the specified activation function to each element in the matrix.
+     * Will throw an error if the specified function is not in the ActivationFunction class
+     * @param name
+     */
+    public void applyActivationToEachElement(String name) {
+        ActivationFunction af = new ActivationFunction(name);
+
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                mat[i][j] = af.activate(mat[i][j]);
+            }
+        }
+
+        return this;
     }
 
 

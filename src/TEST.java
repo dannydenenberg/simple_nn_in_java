@@ -1,5 +1,13 @@
 public class TEST {
     public static void main(String[] args) {
+        Matrix mat = Matrix.random(new Shape(2,2)).multiplyAndConvertToInts(10);
+        mat.setName("MATRIX BEFORE TRANSPOSE");
+        mat.show();
+
+        Matrix mat2 = Matrix.transpose(mat);
+        mat2.setName("MATRIX AFTER TRANSPOSE");
+        mat2.show();
+
 
     }
 

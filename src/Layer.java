@@ -61,7 +61,7 @@ public class Layer {
 
     /**
      * Feeds the inputs through this layer. Produced the activated values of this layer.
-     * @param inputs
+     * @param inputs => this parameter is an array with shape (1, numberOfInputNeurons)
      * @return
      */
     public Matrix feedforward(Matrix inputs) {
@@ -76,41 +76,15 @@ public class Layer {
         3. Activate the vector.
          */
 
-        // multiply the inputs and weights into a vector
-    }
+        // multiply the inputs and weights into a matrix holding the unbias, un-activated values of the neurons
+        Matrix inputsByWeights = Matrix.dot(inputs, weights);
+
+        // add the bias to each element
+        inputsByWeights.add(bias);
+
+        // activate each element in the matrix
 
 
-    /**
-     * A function which returns the appropriate activation function on an integer based on the
-     * value of this.activationFunctionName.
-     * @param number
-     * @return
-     */
-    private double activation(double number) {
-        if (activationFunctionName.equals("sigmoid")) {
-            return sigmoid(number);
-        } else if (activationFunctionName.equals("relu")) {
-            return relu(number);
-        }
 
-        throw new java.lang.RuntimeException("Error: Unknown activation function. IN CLASS: LAYER.");
-    }
-
-    /**
-     * The sigmoid activation function.
-     * @param x
-     * @return
-     */
-    private double sigmoid(double x) {
-        return 1 / (1 + Math.exp(-x));
-    }
-
-    /**
-     * The Relu activation function. Used withing the function `activation(double number)`
-     * @param x
-     * @return
-     */
-    private double relu(double x) {
-        return Math.max(x, 0);
     }
 }
