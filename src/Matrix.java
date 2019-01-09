@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Matrix {
     private double[][] mat;
+    private String name;
 
     /**
      * Convert the class to an array by returning the private matrix.
@@ -9,6 +10,14 @@ public class Matrix {
      */
     public double[][] toArray() {
         return mat;
+    }
+
+    public Shape getShape() {
+        return new Shape(mat.length, mat[0].length);
+    }
+
+    public void setName(String s) {
+        this.name = s;
     }
 
     /**
@@ -47,6 +56,14 @@ public class Matrix {
         return new Matrix(matrix);
     }
 
+    public void multiplyAndConvertToInts(double scalar) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                mat[i][j] = Math.round(mat[i][j] * scalar);
+            }
+        }
+    }
+
     public static double[][] fillShapeWithValue(Shape s, double val) {
         double[][] matrix = new double[s.rows][s.cols];
 
@@ -61,37 +78,49 @@ public class Matrix {
 
     /***************************************************************************/
 
+    /**
+     * Here are the simple matrix with scalar operations.
+     * Each function returns the matrix for ease of initialization.
+     EX:
+        Matrix mat = Matrix.random(new Shape(3,4)).mul(10); // random values from 0 to 10
+     * @param scalar
+     * @return
+     */
 
-    public void mul(double scalar) {
+    public Matrix mul(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
                 mat[i][j] *= scalar;
             }
         }
+        return this;
     }
 
-    public void add(double scalar) {
+    public Matrix add(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
                 mat[i][j] += scalar;
             }
         }
+        return this;
     }
 
-    public void sub(double scalar) {
+    public Matrix sub(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
                 mat[i][j] -= scalar;
             }
         }
+        return this;
     }
 
-    public void div(double scalar) {
+    public Matrix div(double scalar) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
                 mat[i][j] /= scalar;
             }
         }
+        return this;
     }
 
 
@@ -123,4 +152,90 @@ public class Matrix {
     }
 
 
+    public static Matrix add(Matrix matrix, Matrix matrixOther) {
+        double[][] mat = matrixOther.toArray();
+        double[][] otherArray = matrix.toArray();
+
+        double[][] newMatrix = new double[mat.length][mat[0].length];
+
+
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                newMatrix[i][j] = mat[i][j] + otherArray[i][j];
+            }
+        }
+
+        return new Matrix(newMatrix);
+    }
+
+
+    public static Matrix sub(Matrix matrix, Matrix matrixOther) {
+        double[][] mat = matrixOther.toArray();
+        double[][] otherArray = matrix.toArray();
+
+        double[][] newMatrix = new double[mat.length][mat[0].length];
+
+
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                newMatrix[i][j] = mat[i][j] - otherArray[i][j];
+            }
+        }
+
+        return new Matrix(newMatrix);
+    }
+
+    public static Matrix div(Matrix matrix, Matrix matrixOther) {
+        double[][] mat = matrixOther.toArray();
+        double[][] otherArray = matrix.toArray();
+
+        double[][] newMatrix = new double[mat.length][mat[0].length];
+
+
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                newMatrix[i][j] = mat[i][j] / otherArray[i][j];
+            }
+        }
+
+        return new Matrix(newMatrix);
+    }
+
+
+    /**
+     * Returns the dot product of two Matrices
+     * @param first
+     * @param second
+     * @return
+     */
+    public static Matrix dot(Matrix first, Matrix second) {
+        
+    }
+
+
+    /**
+     * Just some print functions to help with visuals.
+     */
+    public void show() {
+        if (name != null) System.out.println("\n" + name + ":");
+        System.out.print("[");
+        for (int i = 0; i < mat.length; i++) {
+            System.out.print(createArrayLineForPrinting(this.mat[i]));
+            if (i != mat.length - 1) {
+                System.out.print(",\n");
+            }
+        }
+        System.out.print("]");
+    }
+
+    private String createArrayLineForPrinting(double[] arr) {
+        String out = "[" + arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            out += ", " + arr[i];
+        }
+
+        out += "]";
+        return out;
+
+    }
 }
