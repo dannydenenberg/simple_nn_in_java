@@ -86,6 +86,6 @@ public class Layer {
         inputsByWeights.applyActivationToEachElement(activationFunctionName);
 
         // return the activated array
-        return inputsByWeights;
+        return Matrix.transpose(inputsByWeights);
     }
 }
