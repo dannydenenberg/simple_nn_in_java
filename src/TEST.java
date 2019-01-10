@@ -1,32 +1,13 @@
 public class TEST {
     public static void main(String[] args) {
-        Matrix mat = Matrix.random(new Shape(2,2)).multiplyAndConvertToInts(10);
-        mat.setName("MATRIX BEFORE TRANSPOSE");
-        mat.show();
-
-        Matrix mat2 = Matrix.transpose(mat);
-        mat2.setName("MATRIX AFTER TRANSPOSE");
-        mat2.show();
+        Matrix m = Matrix.random(new Shape(1, 2));
+        Layer l = new Layer(m.getShape().cols, 3);
 
 
-    }
-
-    public static void testMatrix() {
-        Matrix mat = Matrix.random(new Shape(2,2));
-        mat.multiplyAndConvertToInts(5);
-        mat.setName("Matrix #1");
-        mat.show();
+        Matrix output = l.feedforward(m);
+        output.setName("OUTPUT");
+        output.show();
 
 
-        Matrix mat2 = Matrix.random(new Shape(2,2));
-        mat2.multiplyAndConvertToInts(5);
-        mat2.setName("Matrix #2");
-        mat2.show();
-
-        System.out.println("\n\n\n");
-
-        Matrix matDOtProduct = Matrix.dot(mat, mat2);
-        matDOtProduct.setName("DOT PRODUCT");
-        matDOtProduct.show();
     }
 }

@@ -378,7 +378,7 @@ public class Matrix {
      * Will throw an error if the specified function is not in the ActivationFunction class
      * @param name
      */
-    public void applyActivationToEachElement(String name) {
+    public Matrix applyActivationToEachElement(String name) {
         ActivationFunction af = new ActivationFunction(name);
 
         for (int i = 0; i < mat.length; i++) {

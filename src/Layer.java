@@ -83,8 +83,9 @@ public class Layer {
         inputsByWeights.add(bias);
 
         // activate each element in the matrix
+        inputsByWeights.applyActivationToEachElement(activationFunctionName);
 
-
-
+        // return the activated array
+        return inputsByWeights;
     }
 }
