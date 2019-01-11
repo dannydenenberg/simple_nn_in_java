@@ -59,14 +59,32 @@ public class NeuralNetwork {
 
     /**
      * Feed the inputs through the network.
-     * @param inputs
+     * @param inputs => has a shape of (1, numberOfNeurons)
      * @return
      */
-    public Matrix feedforward(Matrix inputs, int index) {
-        // TODO: FIX
+    public Matrix feedforward(Matrix inputs) {
+        // random just to keep initialization errors away
+        Matrix outputs = Matrix.random(new Shape(4,2));
 
-        return feedforward(layers.get(index).feedforward(inputs), index+1);
 
+        for (int i = 0; i < layers.size(); i++) {
+            if (i==0) {
+                outputs = layers.get(0).feedforward(inputs);
+            } else {
+                outputs = layers.get(i).feedforward(outputs);
+            }
+        }
+
+        return outputs;
+    }
+
+
+    public void showState() {
+        System.out.println("\n\nNN STATE:\n--------------------------------------------------------------------------------------------");
+        for (int i = 0; i < layers.size(); i++) {
+            System.out.println("Layer #" + (i+1) + "............. # of Inputs: " + layers.get(i).getInputNeuronsNumber() + "..............# of Outputs: " + layers.get(i).getNumberOfNeurons());
+            System.out.println("--------------------------------------------------------------------------------------------");
+        }
     }
 
 }

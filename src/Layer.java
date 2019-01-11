@@ -12,6 +12,15 @@ public class Layer {
     private int inputNeuronsNumber;
     private int numberOfNeurons;
     private Matrix weights;
+
+    public int getInputNeuronsNumber() {
+        return inputNeuronsNumber;
+    }
+
+    public int getNumberOfNeurons() {
+        return numberOfNeurons;
+    }
+
     private double bias;
 
     private String activationFunctionName;
@@ -65,10 +74,7 @@ public class Layer {
      * @return
      */
     public Matrix feedforward(Matrix inputs) {
-        // the layer is represented as a vector of values
-        Matrix activatedOuputs = Matrix.ones(new Shape(numberOfNeurons, 1));
-
-
+        
         // TODO:
         /*
         1. Multiply inputs and weights into a vector.
@@ -76,7 +82,7 @@ public class Layer {
         3. Activate the vector.
          */
 
-        // multiply the inputs and weights into a matrix holding the unbias, un-activated values of the neurons
+        // multiply the inputs and weights into a matrix holding the un-bias, un-activated values of the neurons
         Matrix inputsByWeights = Matrix.dot(inputs, weights);
 
         // add the bias to each element
