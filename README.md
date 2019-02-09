@@ -14,3 +14,11 @@ A simple neural network built from scratch in Java.
 ### Shape.java
  * A simple class to represent the shape of a matrix.
  
+### ActivationFunction.java
+ * Represents a single activation function.
+ * During initialization, specify the activation function you want to use, and when you call ```activate(double number```, it will use the specified function
+ 
+### Layer.java
+ * A single layer in the network.
+ * Has its own weights, biases, and activation functions.
+ 
