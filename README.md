@@ -26,8 +26,7 @@ Example code for using the matrix library:
 ```java
 ...
 public static void main(String[] args) {
-    /**** Initializing Matrices ****/
-    
+// Initialization
     // Simply give it a 2d array
     Matrix m = new Matrix([[1,2,3],[4,5,6],[7,8,9]]);
     
@@ -59,7 +58,6 @@ public static void main(String[] args) {
     
     // Pretty printing to the console
     m.show();
-    
 }
 ...
 ```
